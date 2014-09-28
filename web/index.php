@@ -36,7 +36,9 @@
   <script src="js/dep/bootstrap/dist/js/bootstrap.min.js"></script>
   <script src="js/dep/angular/angular.js"></script>
   <script src="js/dep/angular-route/angular-route.js"></script>
+  <script src="js/dep/angular/angular-resource.min.js"></script>
   <script src="js/app.js"></script>
+  <script src="js/services/services.js"></script>
   <script src="js/view1/search-flight.js"></script>
   <script src="js/view2/add-flight.js"></script>
   <script src="js/components/version/version.js"></script>

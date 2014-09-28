@@ -1,7 +1,9 @@
 'use strict';
-console.log('hello');
+
 
 angular.module('myApp.searchFlight', ['ngRoute'])
+
+
 
 .config(['$routeProvider', function($routeProvider) {
   $routeProvider.when('/search-flight', {
@@ -10,6 +12,27 @@ angular.module('myApp.searchFlight', ['ngRoute'])
   });
 }])
 
-.controller('SearchFlightCrtl', [function() {
+.controller('SearchFlightCrtl', function() {
 
-}]);
+})
+
+.directive('searchInput',  function(){
+
+	return{
+		restrict: 'E',
+		controller: ['myFactory', function(myFactory){
+			this.search = {}
+			this.printOut = function () {
+				
+				console.log(myFactory);
+			};
+
+			
+			
+
+
+		}],
+		controllerAs: 'sInput',
+		templateUrl: 'js/view1/search-input.html'
+	}
+})
