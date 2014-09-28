@@ -12,27 +12,35 @@ angular.module('myApp.searchFlight', ['ngRoute'])
   });
 }])
 
-.controller('SearchFlightCrtl', function() {
+.controller('SearchFlightCrtl', ['$scope', function($scope) {
+	//Main Contorller For search FLight
+	
+	$scope.addAFlight = function(id){
+		console.log(id);
+	}
 
-})
+}])
 
 .directive('searchInput',  function(){
-
+	//search-input directive element
 	return{
 		restrict: 'E',
-		controller: ['myFactory', function(myFactory){
-			this.search = {}
-			this.printOut = function () {
-				
-				console.log(myFactory);
-			};
+		scope: {
+			search: '&onClick',
 
-			
-			
-
-
-		}],
-		controllerAs: 'sInput',
+		},
+		
 		templateUrl: 'js/view1/search-input.html'
 	}
+})
+
+
+.directive('flightList', function(){
+	//flight view list directive
+	return{
+		restrict: 'E',
+		template: '<div></div>'
+	}
+
+
 })
