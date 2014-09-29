@@ -31,7 +31,7 @@ angular.module('myApp.searchFlight', ['ngRoute'])
 		transclude: true,
 
 		templateUrl: 'js/view1/flight-list.html',
-		controller: ['$scope', function($scope){
+		controller: ['Flight', '$scope', function(Flight,$scope){
 			var flights = $scope.flights = [{'id': 'Search A new flight'}];
 			/*console.log("Flight List Crtl scope");
 			console.log($scope);
@@ -76,8 +76,17 @@ angular.module('myApp.searchFlight', ['ngRoute'])
 		     $scope.addAFlight = function(id){
 		     		console.log('called add flight');
 					var flight = {'id': id};
-					$scope.flights.unshift(flight);
-					$scope.select(flight);
+					
+
+					Flight.get({id: id}, function(data){
+						
+						$scope.flights.unshift(data);
+						$scope.select(data);
+						$scope.$broadcast('FoundFlight');
+					}, function(e){
+						
+						$scope.$broadcast('notFound');
+					}); 
 					
 				};
 
@@ -126,6 +135,7 @@ angular.module('myApp.searchFlight', ['ngRoute'])
 			scope.repeat = false;
 			scope.$watch('flightCode', function(code){
 				var pattern, test;
+				
 				if(code != ""){
 					
 					pattern = /^\w{2}\d{3,5}$/;
@@ -149,8 +159,7 @@ angular.module('myApp.searchFlight', ['ngRoute'])
 				var flights = scope.$parent.flights;
 				scope.repeat = false;
 				for(var i=0;i<flights.length;i++){
-					console.log(flights[i].id);
-					console.log(code);
+				
 					if(flights[i].id == code){
 						console.log('found match');
 						scope.repeat = true;
@@ -166,6 +175,11 @@ angular.module('myApp.searchFlight', ['ngRoute'])
 
 
 			};
+			scope.$on('notFound', function(){scope.isValidInput = "Sorry Your Fligth was not found"});
+			scope.$on('FoundFlight', function(){
+				
+				scope.flightCode = '';
+			});
 			
 			
 
@@ -210,22 +224,4 @@ angular.module('myApp.searchFlight', ['ngRoute'])
 		},
 	}
 })
-.directive('hello', function(){
-	return{
-		restrict:'E',
-		scope: {},
-		controller: ['$scope','$http', function($scope,  $http){
-			$http.get('./hello').
-			success(function(data) {
-				console.log(data);
-			$scope.hello = data;
-			}).error(function(e){
-				console.log(e);
-			}); 
-		}],
-		template: '<p>{{hello}}</p>'
-	}
-}
 
-
-	)

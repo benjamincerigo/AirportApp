@@ -11,10 +11,10 @@ angular.module('myApp.services', ['ngRoute'])
 })
 .factory('Flight', ['$resource',
 		function($resource) {
-				return $resource('/flight/:id', {id: '@id'});
+				return $resource('./flight/:id', {id: '@id'});
 		}
 ])
-/*
+
 
 .factory('helloRes', ['$resource', 
 	function(){
@@ -44,6 +44,6 @@ angular.module('myApp.services', ['ngRoute'])
 			return delay.promise;
 		}
 	}
-]);*/
+]);
 
 
