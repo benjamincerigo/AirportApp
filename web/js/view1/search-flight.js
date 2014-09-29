@@ -15,27 +15,13 @@ angular.module('myApp.searchFlight', ['ngRoute'])
 .controller('SearchFlightCrtl', ['$scope', function($scope) {
 	//Main Contorller For search FLight
 	
-	$scope.addAFlight = function(id){
-		var flight = {'id':id};
-		$scope.flights.push(flight);
-		$scope.select(flight);
-		console.log($scope.flights);
-	}
+		
+	
+	
 
 }])
 
-.directive('searchInput',  function(){
-	//search-input directive element
-	return{
-		restrict: 'E',
-		scope: {
-			search: '&onClick',
 
-		},
-		
-		templateUrl: 'js/view1/search-input.html'
-	}
-})
 
 
 .directive('flightList', function(){
@@ -43,18 +29,31 @@ angular.module('myApp.searchFlight', ['ngRoute'])
 	return{
 		restrict: 'E',
 		transclude: true,
+
 		templateUrl: 'js/view1/flight-list.html',
 		controller: ['$scope', function($scope){
-			var flights = $scope.flights = [];
+			var flights = $scope.flights = [{'id': 'Search A new flight'}];
+			/*console.log("Flight List Crtl scope");
+			console.log($scope);
+			console.log("Flight List Crtl scope");
+			console.log($scope.this);*/
 
-
+			$scope.searchBool = true
 			$scope.select = function(flight) {
 
-		          angular.forEach(flights, function(flight) {
-		          	
+				angular.forEach(flights, function(flight) {
+		          	$scope.searchBool = false;
 		            flight.selected = false;
 		          });
+				
+				
+				if(flight.id == 'Search A new flight'){
+					$scope.searchBool = true;
+				}else{
+		          
 		          flight.selected = true;
+		      	}
+		      	console.log(flight.searchBool);
 		          
 		       };
 
@@ -67,19 +66,40 @@ angular.module('myApp.searchFlight', ['ngRoute'])
 		     		if(flights[i].id == flight.id){
 		     			flights.splice(i, 1);
 		     		}
+		     		};
+		     		console.log(flights);
 		     		
 
 		     	};
+		     	 
 		     	
-		     	
-		     	console.log(flights);
+		     $scope.addAFlight = function(id){
+		     		console.log('called add flight');
+					var flight = {'id': id};
+					$scope.flights.unshift(flight);
+					$scope.select(flight);
+					
+				};
 
 		     	
-		     };
+		     	
+		     	
+		     	
+				$scope.select(flights[0]);
+		     	
+		     
 
 			
 		}],
-		controllerAs: 'flightListCrtl'
+		controllerAs: 'flightListCrtl',
+		link: function(s, e, a , c){
+			/*console.log("flight list scope");
+			console.log(s);
+			console.log("flight list ctrl");
+			console.log(c);*/
+		}
+
+
 
 		
 
@@ -90,6 +110,71 @@ angular.module('myApp.searchFlight', ['ngRoute'])
 
 
 
+})
+.directive('searchInput',  function(){
+	//search-input directive element
+	return{
+		restrict: 'E',
+		require: "^flightList",
+		scope: {
+			succesSubmit: '&onSubmit',
+			searchBool: '=toShow'
+		},
+		templateUrl: 'js/view1/search-input.html',
+		link: function(scope, element, attr, ctrl){
+			scope.isValidCode = false;
+			scope.repeat = false;
+			scope.$watch('flightCode', function(code){
+				var pattern, test;
+				if(code != ""){
+					
+					pattern = /^\w{2}\d{3,5}$/;
+					test = pattern.test(code);
+					if(!test){ 
+						scope.isValidInput = "Your flight code is not valid";
+					}else{
+						scope.isValidInput = "";
+					}
+					scope.isValidCode = test;
+					
+
+					
+				}else{
+					scope.isValidInput = "";
+				}
+			});
+
+			scope.allReadyHave = function(code){
+				
+				var flights = scope.$parent.flights;
+				scope.repeat = false;
+				for(var i=0;i<flights.length;i++){
+					console.log(flights[i].id);
+					console.log(code);
+					if(flights[i].id == code){
+						console.log('found match');
+						scope.repeat = true;
+
+					}else{
+						scope.isValidInput = "";
+					}
+				};
+
+				scope.isValidInput = scope.repeat? "You Already Have this flight":"" ;
+						
+				
+
+
+			};
+			
+			
+
+
+			
+		}
+
+
+	}
 })
 
 .directive('flightView', function(){
@@ -104,6 +189,10 @@ angular.module('myApp.searchFlight', ['ngRoute'])
 			remove: '&removeClick'
 			
 		},
+
+		link: function(s, e, a, c){
+			
+		}
 		
 	}
 

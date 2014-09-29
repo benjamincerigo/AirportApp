@@ -1,8 +1,11 @@
 
-<search-input on-click="addAFlight(id)"></search-input>
+
 <flight-list>
+
+	<search-input to-show='searchBool'on-submit="addAFlight(id)"></search-input>
+
 	<flight-view ng-repeat='flight in flights' info='flight' remove-click='flightListCrtl.removeFlight(flight.id)'>
-	<div removeflight><a >remove</a><div>
+
 </flight-view>
 </flight-list>
 
