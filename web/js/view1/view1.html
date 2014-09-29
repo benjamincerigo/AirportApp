@@ -1,5 +1,7 @@
 
 <search-input on-click="addAFlight(id)"></search-input>
-<flight-list></flight-list>
+<flight-list>
+	<flight-view ng-repeat='flight in flights' info='flight'></flight-view>
+</flight-list>
 
 

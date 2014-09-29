@@ -1,0 +1,13 @@
+
+
+<div class="tabbable">
+  <ul class="nav nav-tabs">
+    <li ng-repeat="flight in flights" ng-class="{active:flight.selected}">
+      <a href="" ng-click="select(flight)">{{flight.id}}</a>
+    </li>
+  </ul>
+  <div class="tab-content" ng-transclude></div>
+</div>
+
+
+
