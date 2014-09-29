@@ -210,3 +210,22 @@ angular.module('myApp.searchFlight', ['ngRoute'])
 		},
 	}
 })
+.directive('hello', function(){
+	return{
+		restrict:'E',
+		scope: {},
+		controller: ['$scope','$http', function($scope,  $http){
+			$http.get('./hello').
+			success(function(data) {
+				console.log(data);
+			$scope.hello = data;
+			}).error(function(e){
+				console.log(e);
+			}); 
+		}],
+		template: '<p>{{hello}}</p>'
+	}
+}
+
+
+	)
