@@ -58,15 +58,28 @@ angular.module('myApp.searchFlight', ['ngRoute'])
 		          
 		       };
 
-		     this.removeFlight = function(flight){
-		     	/*var position = $.inArray(flight.id, flights);
-		     	if(position) flights.slice(position, 1);*/
+		     $scope.removeFlight = function(flight){
+		     	
+		     	console.log("remove From Controller");
+		     	console.log(flights);
+		     	var position =  flights.indexOf(flight);
+		     	for(var i=0; i < flights.length; i++){
+		     		if(flights[i].id == flight.id){
+		     			flights.splice(i, 1);
+		     		}
+		     		
+
+		     	};
+		     	
+		     	
+		     	console.log(flights);
 
 		     	
-		     }
+		     };
 
 			
 		}],
+		controllerAs: 'flightListCrtl'
 
 		
 
@@ -85,15 +98,26 @@ angular.module('myApp.searchFlight', ['ngRoute'])
 		require: "^flightList",
 		transclude: true,
 		templateUrl: 'js/view1/flight-view.html',
+		
 		scope:{
 			flight: '=info',
+			remove: '&removeClick'
 			
 		},
-		link: function(scope, element, attrs, flListCrtl){
-			
-			
-		}
-
+		
 	}
 
+})
+
+.directive('flightclick', function(){
+	return {
+		
+		link: function(scope, element, attr){
+
+			element.bind('click', function(){
+				scope.$parent.$apply(attr.flightclick);
+			})
+
+		},
+	}
 })
