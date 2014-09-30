@@ -107,6 +107,8 @@ The app aims to give a usuable application and an improved experience through th
 
 Points of Critique. From Research I have done it seems that the creation of models as Java script object can be useful. Especially in creating a composite model; made up of other models. This however would take more research on my part. 
 
+Some things that did not have time to change. My server was not serving .html files. I could not find out why. THis is why the index is not in a api folder and why you must visit /index.html to view the app. 
+
 
 
 
