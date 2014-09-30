@@ -1,7 +1,7 @@
 'use strict';
 
 
-angular.module('myApp.searchFlight', ['ngRoute'])
+angular.module('airportApp.searchFlight', ['ngRoute'])
 
 
 
@@ -69,12 +69,12 @@ angular.module('myApp.searchFlight', ['ngRoute'])
 		     	 
 		     //Add a Flight 
 		     $scope.addAFlight = function(id){
-		     		console.log('called add flight');
+		     		
 					var flight = {'id': id};
 					
 					//Use service to get the flight from the server
 					Flight.get({id: id}, function(data){
-						console.log(data);
+						
 						$scope.flights.unshift(data);
 						$scope.select(data);
 						$scope.$broadcast('FoundFlight');

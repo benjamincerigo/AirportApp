@@ -3,7 +3,7 @@
 'use strict';
 
 
-angular.module('myApp.flightView', [])
+angular.module('airportApp.flightView', [])
 
 
 //flight-view directive
@@ -24,7 +24,7 @@ angular.module('myApp.flightView', [])
 			$scope.$watch('flight.day', function(day){
 				
 				if(($scope.flight.id != undefined) && ($scope.flight.id != 'Search A new flight')){
-					console.log($scope.flight.id);
+					
 					//Load Schedule
 					Schedule.query({day:day, id: $scope.flight.id}, function(data){
 						//success
@@ -37,7 +37,7 @@ angular.module('myApp.flightView', [])
 						
 					}, function(e){
 						//error
-						console.log(e);
+						alert(e);
 					});
 				}
 			});

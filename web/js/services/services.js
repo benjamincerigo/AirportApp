@@ -5,7 +5,7 @@
 
 
 
-angular.module('myApp.services', ['ngRoute'])
+angular.module('airportApp.services', ['ngRoute'])
 .factory("myFactory", function() {
     return "a value";
 })
