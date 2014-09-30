@@ -155,13 +155,14 @@ $app->get('/', function() use($app) {
 
 //GET the Flight from the $flights array using the id
 $app->get('/flight/{id}', function(Silex\Application $app, $id) use($app, $flights) {
+
+  //Find istance of the flight
   foreach($flights as $array){
   	if($array['id'] == $id){
   		$output = $array;
   	}
 
   }
-
 
   if(!($output)){ $app->abort(404, "Flight $id does not exist.");}
   $app['monolog']->addDebug(json_encode($output));
@@ -174,14 +175,14 @@ $app->get('/schedule/{day}/{id}', function(Silex\Application $app, $day, $id) us
   //Set up variables
   $output = array();
   $dayName = findDayName($day);
-  //$app['monolog']->addDebug("day Name: ".$dayName);
+  //Find the Day array
   $daySchedule = $days[$dayName];
-  //$app['monolog']->addDebug("day Scedual: ".json_encode($daySchedule));
   
+  //Find all the instance of the flight code
   foreach($daySchedule as $array){
       
       if (isset($array[$id])) {
-        //$app['monolog']->addDebug("Time: ".json_encode($array[$id]));
+        
         $output[] = $array[$id];
         $app['monolog']->addDebug(json_encode($output));
     }
