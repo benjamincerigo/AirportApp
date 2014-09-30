@@ -33,7 +33,7 @@ angular.module('myApp.flightView', [])
 		templateUrl: 'js/view1/flightdep.html',
 		controller: ['$scope',function($scope){
 			
-			$scope.something = 'hello';
+			
 			this.registering = false;
 			this.addTitle = function(title){
 				this.title = title;
@@ -42,10 +42,15 @@ angular.module('myApp.flightView', [])
 			this.addAirport = function(airport){
 				this.airport = airport;
 			};
+
+			this.registerForm = function(){
+				this.registering = true;
+			};
 			
 
 		}],
 		scope:{},
+		controllerAs: 'moveCtrl'
 		
 
 
@@ -59,7 +64,8 @@ angular.module('myApp.flightView', [])
 		link: function(s, e, a, c){
 			console.log(c);
 			c.addTitle('Departure');
-			c.addAirport(a.takeOff);
+			console.log(a.takeoff);
+			c.addAirport(a.takeoff);
 		}
 	};
 })
@@ -71,6 +77,7 @@ angular.module('myApp.flightView', [])
 		link: function(s, e, a, c){
 			console.log(c);
 			c.addTitle('Arrival');
+			console.log(a.takeoff);
 			c.addAirport(a.land);
 		}
 	};
@@ -90,4 +97,9 @@ angular.module('myApp.flightView', [])
 		}
 	};
 })
+.controller('moveRegistrationCtrl', function(){
+	this.registation = {};
+
+	this.
+}
 
