@@ -12,7 +12,7 @@ angular.module('myApp.flightView', [])
 		restrict: 'E',
 		require: "^flightList",
 		transclude: true,
-		templateUrl: 'js/view1/flight-view.html',
+		templateUrl: 'js/view/flight-view.html',
 		controller: ['Schedule', 'ADate','$scope', function(Schedule, ADate, $scope){
 			
 			//scduel for the day which is loaded from the select in the flight-schedual select
@@ -93,7 +93,7 @@ angular.module('myApp.flightView', [])
 
 		transclude: true,
 
-		templateUrl: 'js/view1/flightdep.html',
+		templateUrl: 'js/view/flightdep.html',
 		controller: ['$scope',function($scope){
 			
 			// Boolean to show or hide registering
@@ -176,7 +176,7 @@ angular.module('myApp.flightView', [])
  		transclude: true,
  		require: ["^flightView", "^^flightList"],
  		scope: false,
- 		templateUrl: 'js/view1/flight-schedule.html',
+ 		templateUrl: 'js/view/flight-schedule.html',
  		
  	}
  })
@@ -185,7 +185,7 @@ angular.module('myApp.flightView', [])
 .directive('flightPast', function(){
 	return{
 		restrict:'E',
-		templateUrl: 'js/view1/flight-past.html',
+		templateUrl: 'js/view/flight-past.html',
 		controller: ['$scope',function($scope){
 			
 			this.pastFlightEvents = $scope.pastFlightEvents;
@@ -217,7 +217,7 @@ angular.module('myApp.flightView', [])
 		replace:'true',
 		require: "^flightPast",
 		
-		templateUrl:'js/view1/past-flight-event.html',
+		templateUrl:'js/view/past-flight-event.html',
 		scope: {
 			pastFlightEvent: '=info'
 		},

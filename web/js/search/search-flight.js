@@ -7,7 +7,7 @@ angular.module('myApp.searchFlight', ['ngRoute'])
 
 .config(['$routeProvider', function($routeProvider) {
   $routeProvider.when('/search-flight', {
-    templateUrl: 'js/view1/view1.html',
+    templateUrl: 'js/view/view.html',
     controller: 'SearchFlightCrtl'
   });
 }])
@@ -23,7 +23,7 @@ angular.module('myApp.searchFlight', ['ngRoute'])
 		restrict: 'E',
 		transclude: true,
 
-		templateUrl: 'js/view1/flight-list.html',
+		templateUrl: 'js/view/flight-list.html',
 		controller: ['Flight', '$scope', function(Flight,$scope){
 
 			var flights;
@@ -109,7 +109,7 @@ angular.module('myApp.searchFlight', ['ngRoute'])
 			succesSubmit: '&onSubmit',
 			searchBool: '=toShow'
 		},
-		templateUrl: 'js/view1/search-input.html',
+		templateUrl: 'js/view/search-input.html',
 		link: function(scope, element, attr, ctrl){
 
 			//Vailat Varibles
