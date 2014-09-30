@@ -11,7 +11,26 @@ angular.module('myApp.services', ['ngRoute'])
 })
 .factory('Flight', ['$resource',
 		function($resource) {
-				return $resource('./flight/:id', {id: '@id'});
+				return $resource('./flight/:id', {id: '@id'}, {
+					getData: {method:'GET', isArray: true}
+				});
+				
+		}
+])
+.factory('Schedule', ['$resource',
+		function($resource) {
+				return $resource('./schedule/:day/:id', {day: '@day', id: '@id'},{
+
+					'get':    {method:'GET'},
+					'query':  {method:'GET', isArray:true},
+				});
+
+		}
+])
+
+.factory('ADate', [
+		function() {
+				return new Date();
 		}
 ])
 

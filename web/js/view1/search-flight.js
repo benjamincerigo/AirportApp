@@ -13,13 +13,10 @@ angular.module('myApp.searchFlight', ['ngRoute'])
 }])
 
 .controller('SearchFlightCrtl', ['$scope', function($scope) {
-	//Main Contorller For search FLight
+	//Top Contoller for the web app Not needed currently
 	
 }])
-
-
-
-
+//Element which controls te flight list. 
 .directive('flightList', function(){
 	//flight view list directive
 	return{
@@ -50,7 +47,7 @@ angular.module('myApp.searchFlight', ['ngRoute'])
 		          
 		          flight.selected = true;
 		      	}
-		      	console.log(flight.searchBool);
+		      	
 		          
 		       };
 
@@ -75,7 +72,7 @@ angular.module('myApp.searchFlight', ['ngRoute'])
 		     		console.log('called add flight');
 					var flight = {'id': id};
 					
-
+					//Use service to get the flight from the server
 					Flight.get({id: id}, function(data){
 						console.log(data);
 						$scope.flights.unshift(data);
@@ -119,7 +116,8 @@ angular.module('myApp.searchFlight', ['ngRoute'])
 			scope.isValidCode = false;
 			scope.repeat = false;
 
-			//watch the input to see if valid cod is entered
+			//watch the input to see if valid code is entered
+			//This should be moved into a Service
 			scope.$watch('flightCode', function(code){
 				var pattern, test;
 				
@@ -153,11 +151,11 @@ angular.module('myApp.searchFlight', ['ngRoute'])
 						scope.repeat = true;
 
 					}else{
-						scope.isValidInput = "";
+						
 					}
 				};
 				// Out put Error
-				scope.isValidInput = scope.repeat? "You Already Have this flight":"" ;
+				scope.isValidInput = scope.repeat? "You Already Have this flight":"Loading..." ;
 						
 				
 
@@ -167,6 +165,8 @@ angular.module('myApp.searchFlight', ['ngRoute'])
 			scope.$on('notFound', function(){scope.isValidInput = "Sorry Your Fligth was not found"});
 			scope.$on('FoundFlight', function(){
 				scope.flightCode = '';
+				scope.isValidInput = '';
+
 			});
 
 			

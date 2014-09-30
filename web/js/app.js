@@ -7,7 +7,20 @@ angular.module('myApp', [
   'myApp.searchFlight',
   'myApp.services',
   'myApp.flightView'
-]).
-config(['$routeProvider', function($routeProvider) {
+])
+.config(['$routeProvider', function($routeProvider) {
   $routeProvider.otherwise({redirectTo: '/search-flight'});
-}]);
+}])
+//A title attribute
+.directive('myTitle', function(){
+	return{
+		
+		require: 'flightPast',
+		link: function(s, e, a, c){
+			
+			c.addTitle(a.myTitle);
+			
+			
+		}
+	};
+});
