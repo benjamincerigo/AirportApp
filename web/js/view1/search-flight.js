@@ -15,10 +15,6 @@ angular.module('myApp.searchFlight', ['ngRoute'])
 .controller('SearchFlightCrtl', ['$scope', function($scope) {
 	//Main Contorller For search FLight
 	
-		
-	
-	
-
 }])
 
 
@@ -32,13 +28,14 @@ angular.module('myApp.searchFlight', ['ngRoute'])
 
 		templateUrl: 'js/view1/flight-list.html',
 		controller: ['Flight', '$scope', function(Flight,$scope){
-			var flights = $scope.flights = [{'id': 'Search A new flight'}];
-			/*console.log("Flight List Crtl scope");
-			console.log($scope);
-			console.log("Flight List Crtl scope");
-			console.log($scope.this);*/
 
+			var flights;
+			//flights Variable: initialed with Extra Flight of Search A new flight
+			flights = $scope.flights = [{'id': 'Search A new flight'}];
+			
+			//Used to Show Seach
 			$scope.searchBool = true
+			//Select a tab and Show FLight
 			$scope.select = function(flight) {
 
 				angular.forEach(flights, function(flight) {
@@ -57,6 +54,7 @@ angular.module('myApp.searchFlight', ['ngRoute'])
 		          
 		       };
 
+		       //Remove a Flight from Tab
 		     $scope.removeFlight = function(flight){
 		     	
 		     	console.log("remove From Controller");
@@ -72,14 +70,14 @@ angular.module('myApp.searchFlight', ['ngRoute'])
 
 		     	};
 		     	 
-		     	
+		     //Add a Flight 
 		     $scope.addAFlight = function(id){
 		     		console.log('called add flight');
 					var flight = {'id': id};
 					
 
 					Flight.get({id: id}, function(data){
-						
+						console.log(data);
 						$scope.flights.unshift(data);
 						$scope.select(data);
 						$scope.$broadcast('FoundFlight');
@@ -90,10 +88,7 @@ angular.module('myApp.searchFlight', ['ngRoute'])
 					
 				};
 
-		     	
-		     	
-		     	
-		     	
+		     	//
 				$scope.select(flights[0]);
 		     	
 		     
@@ -101,25 +96,13 @@ angular.module('myApp.searchFlight', ['ngRoute'])
 			
 		}],
 		controllerAs: 'flightListCrtl',
-		link: function(s, e, a , c){
-			/*console.log("flight list scope");
-			console.log(s);
-			console.log("flight list ctrl");
-			console.log(c);*/
-		}
-
-
-
-		
-
-		
-		
-
 	}
 
 
 
 })
+
+//search-input 
 .directive('searchInput',  function(){
 	//search-input directive element
 	return{
@@ -131,8 +114,12 @@ angular.module('myApp.searchFlight', ['ngRoute'])
 		},
 		templateUrl: 'js/view1/search-input.html',
 		link: function(scope, element, attr, ctrl){
+
+			//Vailat Varibles
 			scope.isValidCode = false;
 			scope.repeat = false;
+
+			//watch the input to see if valid cod is entered
 			scope.$watch('flightCode', function(code){
 				var pattern, test;
 				
@@ -154,6 +141,7 @@ angular.module('myApp.searchFlight', ['ngRoute'])
 				}
 			});
 
+			//See if already have the Flight code
 			scope.allReadyHave = function(code){
 				
 				var flights = scope.$parent.flights;
@@ -168,60 +156,23 @@ angular.module('myApp.searchFlight', ['ngRoute'])
 						scope.isValidInput = "";
 					}
 				};
-
+				// Out put Error
 				scope.isValidInput = scope.repeat? "You Already Have this flight":"" ;
 						
 				
 
 
 			};
+			//Watch for founf and not founf events
 			scope.$on('notFound', function(){scope.isValidInput = "Sorry Your Fligth was not found"});
 			scope.$on('FoundFlight', function(){
-				
 				scope.flightCode = '';
 			});
-			
-			
-
 
 			
 		}
 
-
 	}
-})
+});
 
-.directive('flightView', function(){
-	return{
-		restrict: 'E',
-		require: "^flightList",
-		transclude: true,
-		templateUrl: 'js/view1/flight-view.html',
-		
-		scope:{
-			flight: '=info',
-			remove: '&removeClick'
-			
-		},
-
-		link: function(s, e, a, c){
-			
-		}
-		
-	}
-
-})
-
-.directive('flightclick', function(){
-	return {
-		
-		link: function(scope, element, attr){
-
-			element.bind('click', function(){
-				scope.$parent.$apply(attr.flightclick);
-			})
-
-		},
-	}
-})
 

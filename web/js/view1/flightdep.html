@@ -1,0 +1,18 @@
+<div panel class='row'>
+<h2 class>{{moveCtrl.title}}: {{moveCtrl.airport}}</h2>
+<span><div class="btn btn-default" ng-click="register()">{{moveCtrl.title}} register</div><span>
+<div ng-hide='registering'>
+	<form >
+		<input type='date' ng-model='date'></input>
+		<input type='time' ng-model='date'></input>
+		<div>
+			<div panel='small' ng-repeat='flight_contoller in flight_contollers'><p>{{flight_contoller}}</p></div>
+
+			<input type='text' ng-model='add_controller'></input>
+			<button type='button' ng-click='searchController()'>Add Contoller</button>
+		</div>
+		<button type='submit'>Register Flight {{moveCtrl.title}}</button>
+	</form>
+</div>
+
+<div>

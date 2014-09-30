@@ -1,7 +1,7 @@
 
-<form foundForm ng-show='searchBool' ng-submit="!(repeat) && succesSubmit({'id': flightCode})">
-	<input ng-class="code_valid_{{isValidCode}}" type='text' ng-model="flightCode"></input>
-	<button type='submit' ng-click="isValidCode && allReadyHave(flightCode)">Add Flight</button>
+<form foundForm ng-show='searchBool' ng-submit="(isValidCode) && !(repeat) && succesSubmit({'id': flightCode})">
+	<input  type='text' ng-model="flightCode"></input>
+	<button type='submit' ng-click="(isValidCode) && allReadyHave(flightCode)">Add Flight</button>
 <form>
 	<div>
 		<p>{{isValidInput}}</p>

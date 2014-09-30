@@ -1,9 +1,18 @@
 
 
 <div class="flight-content" ng-show="flight.selected">
-	<ul>
-		<li>THe flight id is: {{flight.id}}</li>
-	</ul>
-	<div flightclick='removeFlight({{flight}})'><a >remove</a><div>
+	<div flightclick='removeFlight({{flight}})'><a>remove from searches</a><div>
+		{{flight}}
+	<div panel ng-class="{active:flight.in_flight}">
+		<h2>Flight Code: {{flight.id}}</h2>
+		<h2>Carrier: {{flight.carrier}}</h2>
+		<flightdep takeoff="flight.depart_airport"></flightdep>
+		<flightdep land='flight.arrival_airport'></flightdep>
+		<!--<flight-schedule days='flight.days'><flight-scchdule>
+		<flight-past departures='flight.departures'></flight-past>
+		<flight-past arrivals='flight.arrivials'></flight-past>-->
+	<div>
+
+	
 	
 </div>

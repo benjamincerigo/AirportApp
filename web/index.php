@@ -1,23 +1,29 @@
 <?php
-
+date_default_timezone_set('Europe/Amsterdam');
 require('../vendor/autoload.php');
 $flights= [
   [
     'id'      => 'BW123',
         'carrier'      => 'British Airways',
-        'dep' => "Schipol",
-        'arr' => "London",
-        'days' => ['monday', 'wednessday'],
-        'time' => "11:00"
+        'depart_airport' => "AMS",
+        'arrival_airport' => "LND",
+        'in_flight' => false,
+        /*'days' => ['monday', 'wednessday'],
+        'time' => "11:00",
+        'depatures' => [['09/09/2014', '11:00', 1]],
+        'arrivals' => [['09/09/2014', '11:00', 1]],*/
   ],
 
   [
     'id'      => 'BW124',
         'carrier'      => 'British Airways',
-        'dep' => "Schipol",
-        'arr' => "London",
+        'depart_airport' => "AMS",
+        'arrival_airport' => "LND",
+        'in_flight' => false,
         'days' => ['monday', 'thurday'],
-        'time' => "12:00"
+        'time' => "12:00", 
+        'depatures' => [['09/09/2014', '12:00', 2]],
+        'arrivals' => [['09/09/2014', '12:00', 2]],
   ],
 
   
@@ -34,13 +40,11 @@ $app->register(new Silex\Provider\MonologServiceProvider(), array(
 // Our web handlers
 
 $app->get('/', function() use($app) {
-  $doc = new DOMDocument();
-  $doc->loadHTMLFile("index.html");
-  echo $doc-saveHTML();
+  
 });
 
 $app->get('/hello', function() use($app) {
-  $app['monolog']->addDebug('made a hello');
+  
   return 'Hello from Server';
 });
 
@@ -52,7 +56,10 @@ $app->get('/flight/{id}', function(Silex\Application $app, $id) use($app, $fligh
   	}
 
   }
+
+
   if(!($output)){ $app->abort(404, "Flight $id does not exist.");}
+  $app['monolog']->addDebug(json_encode($output));
   return json_encode($output);
 });
 

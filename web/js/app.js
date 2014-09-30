@@ -5,9 +5,8 @@ angular.module('myApp', [
   'ngRoute',
   'ngResource',
   'myApp.searchFlight',
-  'myApp.addFlight',
-  'myApp.version',
-  'myApp.services'
+  'myApp.services',
+  'myApp.flightView'
 ]).
 config(['$routeProvider', function($routeProvider) {
   $routeProvider.otherwise({redirectTo: '/search-flight'});
