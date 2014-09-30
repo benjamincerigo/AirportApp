@@ -17,10 +17,11 @@ Angularjs - (a few modules from Angular used) - Bootstrap -- JQuery to help out
 
 Currently two flights logged. BW123 and BW124. No other code will give you data from the server. 
 
+Deployed here - http://airport-equidam-2709.herokuapp.com/index.html#/search-flight
 
 -----
 Full proposed app:
-This is the schema for the layers in the Airport app
+This is the schema for the layers in the Airport app -- (there is more text after the image if it doesnt load go to the README.md file.)
 
 ![Alt text](https://github.com/benjamincerigo/AirportApp/blob/master/img/Layers-schema.png "Layer schema")
 
