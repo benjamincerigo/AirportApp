@@ -27,6 +27,16 @@ angular.module('airportApp.services', ['ngRoute'])
 
 		}
 ])
+.factory('FlightController', ['$resource',
+		function($resource) {
+
+				return $resource('./flightcontroller/:id', { id: '@id'}, {
+
+					'get':    {method:'GET'}
+				});
+
+		}
+])
 
 .factory('ADate', [
 		function() {
@@ -50,6 +60,43 @@ angular.module('airportApp.services', ['ngRoute'])
 		}
 	}
 ])
+.factory('repeatIdTest', function(){
+	return function(array, value){
+		if(array.length){
+			for(var i=0;i<array.length;i++){
+			
+				if(array[i].id == value){
+					console.log('found match');
+					 return true;
+
+				}else{
+					return false;
+				}
+			};
+		}
+		else{
+			return false;
+		}
+	}
+})
+
+.factory('removeByAttr', function(){
+	return function(arr, attr, value){
+	    var i = arr.length;
+	    while(i--){
+	       if( arr[i] 
+	           && arr[i].hasOwnProperty(attr) 
+	           && (arguments.length > 2 && arr[i][attr] === value ) ){ 
+
+	           arr.splice(i,1);
+
+	       }
+	    }
+	    return arr;
+	}
+})
+
+
 
 .factory('FlightLoader', ['Flight', '$route', '$q',
 		function(Recipe, $route, $q) {

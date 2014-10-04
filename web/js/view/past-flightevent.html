@@ -1,0 +1,16 @@
+<div class='panel panel-default' >
+	<div ng-click='madeClick()' class="panel-body">
+		<p class='col-md-4'>Date: {{pastFlightEvent.event_date}}</p>
+		<p class='col-md-4'>Time: {{pastFlightEvent.event_time}}</p>
+		<p class='col-md-4'>Land: {{pastFlightEvent.lane}}</p>
+	<div class'row'>
+			<p ng-hide='showFlightControllers'> Click For More info</p>
+			<div ng-show='showFlightControllers'>
+				Flight Controllers:
+				<ul class="list-group">
+					<li class="list-group-item" ng-repeat='flCrtl in pastFlightEvent.flightControllers'>{{flCrtl.first_name}} {{flCrtl.last_name}}</li>
+				</ul>
+			</div>
+		</div>
+	</div>
+</div>

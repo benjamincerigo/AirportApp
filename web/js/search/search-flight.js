@@ -100,7 +100,7 @@ angular.module('airportApp.searchFlight', ['ngRoute'])
 })
 
 //search-input 
-.directive('searchInput',  function(){
+.directive('searchInput',  ['repeatIdTest', function(repeatIdTest){
 	//search-input directive element
 	return{
 		restrict: 'E',
@@ -143,17 +143,7 @@ angular.module('airportApp.searchFlight', ['ngRoute'])
 			scope.allReadyHave = function(code){
 				
 				var flights = scope.$parent.flights;
-				scope.repeat = false;
-				for(var i=0;i<flights.length;i++){
-				
-					if(flights[i].id == code){
-						console.log('found match');
-						scope.repeat = true;
-
-					}else{
-						
-					}
-				};
+				scope.repeat = repeatIdTest(flights, code);
 				// Out put Error
 				scope.isValidInput = scope.repeat? "You Already Have this flight":"Loading..." ;
 						
@@ -173,6 +163,6 @@ angular.module('airportApp.searchFlight', ['ngRoute'])
 		}
 
 	}
-});
+}]);
 
 

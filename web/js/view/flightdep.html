@@ -1,30 +1,9 @@
 
 <h2 class>{{moveCtrl.title}}: {{moveCtrl.airport}}</h2>
-<span><div ng-hide='moveCtrl.registering'class="btn btn-default" ng-click="moveCtrl.registerForm()">{{moveCtrl.title}} register</div><span>
+<span><div class="btn btn-default" ng-click="moveCtrl.registerFormShow()">{{moveCtrl.buttonText}} register</div><span>
 <div ng-show='moveCtrl.registering'>
 
-	<form ng-controller='flightEventRegisterCtrl as flightEventReg'>
-		<div class='row'>
-			<label class='col-md-3' > Date:</label>
-			<input class='col-md-3' type='date' ng-model='flightEventReg.registation.date'></input>
-		</div>
-		<div class='row'>
-			<label class='col-md-3'> Time:</label>
-			<input class='col-md-3' type='time' ng-model='flightEventReg.registation.time'></input>
-		</div>
-		<div class='row'>
-		
-			<label> Flight Controllers:</label>
-			<div panel='small' ng-repeat='flight_contoller in flight_contollers'><p>{{flightEventReg.flight_contoller}}</p></div>
-
-			<input type='text' ng-model='add_controller'></input>
-			<button type='button' ng-click='searchController()'>Add Contoller</button>
-		</div>
-
-		<div class='row'>
-		<button class='col-md-6'type='submit'>Register Flight {{moveCtrl.title}}</button>
-		</div>
-	</form>
+	<flight-event-register info='{{moveCtrl.title}}'></flight-event-register>
 </div>
 
 

@@ -13,25 +13,25 @@ $flights= [
         'in_flight' => false,
         'departures' => array(
           array(
-          'date' => '09/09/2014',
-           'time' =>' 12:00', 
+          'event_date' => '09/09/2014',
+           'event_time' =>' 12:00', 
            'lane'=>2
            ),
             array(
-          'date' => '09/09/2014',
-           'time' =>' 16:30', 
+          'event_date' => '09/09/2014',
+           'event_time' =>' 16:30', 
            'lane'=>2
            ),
         ),
         'arrivals' => array(
           array(
-          'date' => '09/09/2014',
-           'time' =>' 12:00', 
+          'event_date' => '09/09/2014',
+           'event_time' =>' 12:00', 
            'lane'=>2
            ),
           array(
-          'date' => '09/09/2014',
-           'time' =>' 16:30', 
+          'event_date' => '09/09/2014',
+           'event_time' =>' 16:30', 
            'lane'=>2
            ),
           )
@@ -45,25 +45,25 @@ $flights= [
         'in_flight' => false,
         'departures' => array(
           array(
-          'date' => '09/09/2014',
-           'time' =>' 12:00', 
+          'event_date' => '09/09/2014',
+           'event_time' =>' 12:00', 
            'lane'=>1
            ),
             array(
-          'date' => '09/09/2014',
-           'time' =>' 16:30', 
+          'event_date' => '09/09/2014',
+           'event_time' =>' 16:30', 
            'lane'=>1
            )
            ),
         'arrivals' => array(
           array(
-          'date' => '09/09/2014',
-           'time' =>' 08', 
+          'event_date' => '09/09/2014',
+           'event_time' =>' 08', 
            'lane'=>1
            ),
             array(
-          'date' => '09/09/2014',
-           'time' =>' 17:30', 
+          'event_date' => '09/09/2014',
+           'event_time' =>' 17:30', 
            'lane'=>1
            )
            ),
@@ -134,6 +134,34 @@ $days = array(
 
   );
 
+$flightContollers = array(
+      array(
+        'id' => 'C01',
+        'first_name' => 'John',
+        'last_name' => 'Smith'
+        ),
+      array(
+        'id' => 'C02',
+        'first_name' => 'Lucy',
+        'last_name' => 'Smith'
+        ),
+      array(
+        'id' => 'C03',
+        'first_name' => 'Harry',
+        'last_name' => 'Smith'
+        ),
+      array(
+        'id' => 'C04',
+        'first_name' => 'Marry',
+        'last_name' => 'Smith'
+        ),
+      array(
+        'id' => 'C05',
+        'first_name' => 'Albert',
+        'last_name' => 'Smith'
+        )
+      );
+
 
 //Set up app
 
@@ -188,8 +216,7 @@ $app->get('/schedule/{day}/{id}', function(Silex\Application $app, $day, $id) us
     }
   
   }
-  
-  
+
 
     //if error aport
   if(!($output)){ $app->abort(404, "Sorry Your request could not be found");}
@@ -197,6 +224,21 @@ $app->get('/schedule/{day}/{id}', function(Silex\Application $app, $day, $id) us
   return json_encode($output, 128);
 });
 
+$app->get('/flightcontroller/{id}', function(Silex\Application $app, $id) use($app, $flightContollers) {
+
+  //Find istance of the flightContorller
+  $app['monolog']->addDebug('flightContollers ' + $id);
+  foreach($flightContollers as $array){
+    if($array['id'] == $id){
+      $output = $array;
+    }
+
+  }
+
+  if(!($output)){ $app->abort(404, "Contoller $id does not exist.");}
+  $app['monolog']->addDebug(json_encode($output));
+  return json_encode($output);
+});
 
 $app->run();
 

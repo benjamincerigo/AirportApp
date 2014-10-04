@@ -1,0 +1,46 @@
+
+
+<form ng-submit='flightEventReg.register()'>
+	<div class='row'>
+		<label class='col-md-3'  > Date:</label>
+		<input type='text' class='col-md-3' ng-model='flightEventReg.registation.event_date'></input>
+	</div>
+	<div class='row'>
+		<label class='col-md-3' > Time:</label>
+		<input type='text' class='col-md-3' ng-model='flightEventReg.registation.event_time'></input>
+	</div>
+	<div class='row'>
+		<label class='col-md-3' > lane:</label>
+		<input type='text' class='col-md-3' ng-model='flightEventReg.registation.lane'></input>
+	</div>
+	<div class='row'>
+	
+		<label> Flight Controllers: </label>
+		<ul class="list-group">
+		<li class="list-group-item" ng-repeat='aflightcontroller in flightEventReg.registation.flightControllers'>
+			<span>{{aflightcontroller.first_name}}</span>
+			<span> {{aflightcontroller.last_name}}</span> 
+			<a ng-click='flightEventReg.removeAFlightController(aflightcontroller)'>X</a>
+			</li>
+		</ul>
+		
+		<button type='button' class='btn'ng-show='flightEventReg.plusController' ng-click='flightEventReg.searchAdd()'>Add a Flight Controller</button>
+		<div class='panel panel-default'ng-hide='flightEventReg.plusController'>
+			<div class='panel-body'>
+			<input type='text' ng-model='flightEventReg.addcontroller'></input>
+			
+			<div ng-show='flightEventReg.searchError'>{{flightEventReg.searchError}}</div>
+			
+			<div ng-show='flightEventReg.found'><span>{{flightEventReg.foundfc.first_name}}</span><span> {{flightEventReg.foundfc.last_name}}</span>
+				<button  type='button' ng-click='flightEventReg.addController()'>Add Contoller</button>
+			</div>
+		</div>
+		</div>
+
+	</div>
+	
+
+	<div class='row'>
+		<button class='col-md-6'type='submit'>Register Flight Event {{flightEventType}}</button>
+	</div>
+</form>
